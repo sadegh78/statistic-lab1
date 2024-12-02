@@ -1,0 +1,134 @@
+---
+title: "pro a1"
+author: "sadegh akbarian"
+date: "2024-12-02"
+output: html_document
+---
+
+1
+```{r}
+library(car)
+data('Salaries')
+```
+
+```{r}
+my.id = 44+20
+set.seed(my.id)
+n1 = sample(Salaries$yrs.service, size = my.id, replace=FALSE)
+```
+
+```{r}
+mean(n1)
+median(n1)
+```
+```{r}
+sd(n1)
+var(n1)
+range(n1)
+```
+```{r}
+quantile(n1)
+```
+هر چارک میگوید چه مقدار از داده ها کمتر از آن است. 
+چهارک سوم یعنی سه چهارم داده ها کمتر از ۲۹.۲۵ است
+بیشتر تمرکز داده ها در سمت چپ بازه داده هاست یعنی چوله به راست است
+
+
+```{r}
+#install.packages('e1071')
+library(e1071)
+skewness(n1)
+kurtosis(n1)
+hist(n1,col=3)
+```
+
+ضریب چولگی مثبت است و نمودار چوله به راست است.
+کورتوسیس منفی یعنی داده ها نرمال نیستندو نوسانات زیاد ندارند.
+
+2
+```{r}
+str(Salaries)
+my.id = 44+20
+set.seed(my.id)
+n2 = sample(nrow(Salaries), size = my.id, replace=FALSE)
+n2
+dn=Salaries[n2,]
+dn
+#install.packages('ggplot2')
+#install.packages("farver")
+library(farver)
+library(ggplot2)
+ggplot(dn, aes(x = rank, y = salary)) + geom_boxplot()
+ggplot(dn, aes(x = salary)) + geom_histogram(bins = 10,col = 2)
+```
+
+3
+```{r}
+my.id = 44+20
+set.seed(my.id)
+
+n3.1 = rnorm(100,50,10)
+
+n3.2 = round(n3.1)
+
+n3.3 = n3.2[n3.2 %% 6 == 0]
+n3.3
+```
+
+4
+```{r}
+my.id = 44+20
+set.seed(my.id)
+library(car)
+f = function(x){n <- length(x)
+return(n/sum(1/x))}
+fsalary = f(Salaries$salary)
+print(fsalary)
+```
+
+
+5.1
+```{r}
+my.id = 44+20
+set.seed(my.id)
+d1 = integrate(function(x) 1+ x^2,lower = 1/2 , upper = 3)
+print(d1)
+```
+
+5.2
+```{r}
+my.id = 44+20
+set.seed(my.id)
+#install.packages('pracma')
+library(pracma)
+
+fd = function(x,y){
+  x + (y^2) - 1}
+
+d2 = integral2(fd,xmin = 3 , xmax = 5 , ymin = 0 , ymax = 1)
+d2
+```
+
+6
+```{r}
+m = matrix(c(1, 2, 4,
+              6, 1, 3,
+              9, 5, 3),nrow = 3 , byrow = TRUE)
+m
+```
+
+6.1
+```{r}
+det(m)
+```
+
+6.2
+```{r}
+solve(m)
+```
+
+6.3
+```{r}
+diag(m) = c(0,0,0)
+print(m)
+```
